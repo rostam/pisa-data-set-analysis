@@ -15,9 +15,7 @@ df.rename({'CNT': 'Country Code', 'ST03Q02': 'Birth Year', 'ST04Q01': 'Gender',
            'Avg Reading Score': 'Average Reading Score',
            'WEALTH': 'Wealth'}, axis='columns', inplace=True)
 
-df = df.replace(['Connecticut (USA)', 'Florida (USA)', 'Massachusetts (USA)', 'United States of America'], 'USA')
-df = df.replace(['Perm(Russian)', 'Russian Federation', 'Perm(Russian Federation)'], 'Russia')
-df = df.replace('United Kingdom', 'UK')
+
 df = df.drop(columns=['Max Math Score', 'Max Reading Score', 'Max Science Score'])
 
 
@@ -99,14 +97,42 @@ def correct_country_names(country):
             return 'China'
         if country == 'Missing':
             return 'Unknown'
+        if country == 'Chinese Taipei':
+            return 'Taiwan'
+        if country == 'United Arab Emirates':
+            return 'UAE'
+        if country == 'Russian Federation':
+            return 'Russia'
+        if country == 'Republic of Korea':
+            return 'Korea'
+        if country == 'Occupied Palestinian Territory':
+            return 'Unknown'
+        if country == 'Iran, Islamic Republic of':
+            return 'Unknown'
+        if country == 'Netherlands Antilles':
+            return 'Antilles'
         return country
 
 
 df['Birth Country'] = df['Birth Country'].apply(correct_country_names)
 df['Birth Country of Mother'] = df['Birth Country of Mother'].apply(correct_country_names)
 df['Birth Country of Father'] = df['Birth Country of Father'].apply(correct_country_names)
-
-
+```
+df = df.replace(['Connecticut (USA)', 'Florida (USA)', 'Massachusetts (USA)', 'United States of America'], 'USA')
+df = df.replace(['Perm(Russian)', 'Russian Federation', 'Perm(Russian Federation)'], 'Russia')
+df = df.replace('United Kingdom', 'UK')
+df = df.replace('United Arab Emirates', 'UAE')
+df = df.replace(['Hong Kong-China', 'China-Shanghai'], 'China')
+df = df.replace('Chinese Taipei', 'Taiwan')
+df = df.replace('United States', 'USA')
+df = df.replace('Korea, Republic of', 'Korea')
+df = df.replace('Czechia', 'Czech')
+df = df.replace('Czech Republic', 'Czech')
+df = df.replace('Hong Kong', 'China')
+df = df.replace('Macao-China', 'China')
+df = df.replace('Slovak Republic', 'Slovakia')
+df = df.replace('Macao', 'China')
+df = df.replace('Bosnia and Herzegovina', 'Bosnia')
 # print(df.groupby('Birth Country').count())
 # df.info()
 df.to_csv('pisa_data_clean.csv')
