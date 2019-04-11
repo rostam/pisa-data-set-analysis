@@ -117,7 +117,7 @@ def correct_country_names(country):
 df['Birth Country'] = df['Birth Country'].apply(correct_country_names)
 df['Birth Country of Mother'] = df['Birth Country of Mother'].apply(correct_country_names)
 df['Birth Country of Father'] = df['Birth Country of Father'].apply(correct_country_names)
-```
+
 df = df.replace(['Connecticut (USA)', 'Florida (USA)', 'Massachusetts (USA)', 'United States of America'], 'USA')
 df = df.replace(['Perm(Russian)', 'Russian Federation', 'Perm(Russian Federation)'], 'Russia')
 df = df.replace('United Kingdom', 'UK')
